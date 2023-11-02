@@ -1,11 +1,25 @@
-# Bevy GitHub CI Template
+# Hexelment
 
-This repo show how to set up CI on a GitHub project for Bevy.
+Hexelment is a hexagon settlement designer & simulation game set in the Iron Age/Roman period. Design a hex-gridded
+world with settlements in using 4 __scales__: Household; Community; Settlement; and Region. This simulation represents
+a component of my PhD research into complex systems modelling and simulating settlements in Roman Britain to better
+understand the geospatial and economic relationships of different settlements during the Late Iron Age and Roman
+period.
 
-It creates two workflows:
+## Design
 
-* [CI](#CI)
-* [Release](#Release)
+The player designs tiles at each scale, representing 7 hexagons to 1 at the scale above. A community is created
+from 7 household or empty tiles, with 1 from any number of household tile designs being allocated to each of the 7
+tiles. This might results in:
+
+![Design demo](docs/design-demo.png "Design Demo")
+
+Each level in Hexelment runs a progressively harder scenario for the player to attempt. When the player is happy with
+their designs, they click "Run" to generate a procedurally generated world based on the scenario and their designs. A
+simulation will then run based on their designs, whereby the player must meet certain economic and population goals to
+complete that level successfully.
+
+The game finishes when all levels have been completed.
 
 ## CI
 
@@ -42,7 +56,7 @@ You can follow [Managing releases in a repository](https://docs.github.com/en/re
 
 ### Git Tag from the CLI
 
-Execute the following commands: 
+Execute the following commands:
 
 ```sh
 git tag -a "my-game-1.0" -m "First official release"
@@ -81,19 +95,4 @@ Once that is done, any tag pushed to GitHub will trigger an itch.io release and 
 
 ## License
 
-Licensed under either of
-
-* Apache License, Version 2.0
-   ([LICENSE-APACHE-2.0](LICENSE-Apache-2.0) or <http://www.apache.org/licenses/LICENSE-2.0>)
-* MIT License
-   ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
-* CC0-1.0 License
-   ([LICENSE-CC0-1.0](LICENSE-CC0-1.0) or <https://creativecommons.org/publicdomain/zero/1.0/legalcode>)
-
-at your option.
-
-## Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-triple licensed as above, without any additional terms or conditions.
+Licensed under the MIT License [LICENSE](LICENSE-MIT).

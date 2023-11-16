@@ -17,3 +17,10 @@ opt-level = 3
 
 [dependencies]
 bevy = "0.11.3"
+bevy_asset_loader = "0.17.0"
+bevy_ecs_tilemap = { version = "0.11.0", features = ["atlas"] }
+bevy-inspector-egui = "0.20.0"
+bevy_kira_audio = { version = "0.17.0", features = ["ogg"] }
+bevy_pancam = "0.9"
+lazy_static = "1.4.0"
+wasm-bindgen = "0.2.88"

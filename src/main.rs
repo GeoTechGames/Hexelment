@@ -3,6 +3,7 @@
 extern crate lazy_static;
 
 // add AI (https://github.com/zkat/big-brain)
+// add saving https://crates.io/crates/bevy_pkv
 
 // use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_asset_loader::prelude::*;
@@ -62,5 +63,6 @@ fn main() {
 }
 
 fn start_main_menu_music(audio_assets: Res<resources::audio::AudioAssets>, audio: Res<Audio>) {
-    audio.play(audio_assets.main_menu.clone()).looped().with_volume(0.25);
+    audio.stop();
+    audio.play(audio_assets.main_menu.clone()).looped().with_volume(0.0);
 }

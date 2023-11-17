@@ -9,8 +9,6 @@ use crate::config::WINDOW_WIDTH;
 use crate::scenes::AppState;
 use crate::resources::menu::ImageAssets;
 
-
-/// Marker component for the text that displays the current resolution.
 #[derive(Component)]
 struct ResolutionText;
 
@@ -82,34 +80,34 @@ fn buttons(root: &mut ChildBuilder, asset_server: Res<AssetServer>, window: &Win
     for button in ButtonComponent::iterator() {
         root.spawn( match button {
             ButtonComponent::Quit => ButtonBundle {
-                    style: Style {
-                        width: Val::Percent(10.0),
-                        height: Val::Percent(20.0),
-                        justify_content: JustifyContent::Center,
-                        position_type: PositionType::Absolute,
-                        align_items: AlignItems::Center,
-                        align_self: AlignSelf::FlexEnd,
-                        left: Val::Percent(6.5),
-                        right: Val::Auto,
-                        top: Val::Auto,
-                        bottom: Val::Percent(-1.0),
-                        ..Default::default()
-                    },
-                    background_color: BackgroundColor(Color::NONE),
-                    ..Default::default()
-                },
-            ButtonComponent::Settings => ButtonBundle {
                 style: Style {
-                    width: Val::Percent(10.0),
-                    height: Val::Percent(20.0),
+                    width: Val::Percent(20.0),
+                    height: Val::Percent(8.0),
                     justify_content: JustifyContent::Center,
                     position_type: PositionType::Absolute,
                     align_items: AlignItems::Center,
                     align_self: AlignSelf::FlexEnd,
-                    left: Val::Percent(6.5),
+                    left: Val::Percent(1.5),
                     right: Val::Auto,
                     top: Val::Auto,
-                    bottom: Val::Percent(12.0),
+                    bottom: Val::Percent(5.0),
+                    ..Default::default()
+                },
+                background_color: BackgroundColor(Color::NONE),
+                ..Default::default()
+            },
+            ButtonComponent::Settings => ButtonBundle {
+                style: Style {
+                    width: Val::Percent(20.0),
+                    height: Val::Percent(8.0),
+                    justify_content: JustifyContent::Center,
+                    position_type: PositionType::Absolute,
+                    align_items: AlignItems::Center,
+                    align_self: AlignSelf::FlexEnd,
+                    left: Val::Percent(1.5),
+                    right: Val::Auto,
+                    top: Val::Auto,
+                    bottom: Val::Percent(18.0),
                     ..Default::default()
                 },
                 background_color: BackgroundColor(Color::NONE),
@@ -117,16 +115,16 @@ fn buttons(root: &mut ChildBuilder, asset_server: Res<AssetServer>, window: &Win
             },
             ButtonComponent::Levels => ButtonBundle {
                 style: Style {
-                    width: Val::Percent(10.0),
-                    height: Val::Percent(20.0),
+                    width: Val::Percent(20.0),
+                    height: Val::Percent(8.0),
                     justify_content: JustifyContent::Center,
                     position_type: PositionType::Absolute,
                     align_items: AlignItems::Center,
                     align_self: AlignSelf::FlexEnd,
-                    left: Val::Percent(6.5),
+                    left: Val::Percent(1.5),
                     right: Val::Auto,
                     top: Val::Auto,
-                    bottom: Val::Percent(25.5),
+                    bottom: Val::Percent(31.5),
                     ..Default::default()
                 },
                 background_color: BackgroundColor(Color::NONE),
@@ -141,11 +139,11 @@ fn buttons(root: &mut ChildBuilder, asset_server: Res<AssetServer>, window: &Win
             };
             parent.spawn((TextBundle {
                 text: Text::from_section(
-                    text,
-                    TextStyle {
-                        font: asset_server.load("fonts/DockingBay.ttf"),
-                        font_size: 6.0 * ((window.width() / WINDOW_WIDTH) * 2.0),
-                        color: Color::WHITE,
+                text,
+                TextStyle {
+                    font: asset_server.load("fonts/DockingBay.ttf"),
+                    font_size: 6.0 * ((window.width() / WINDOW_WIDTH) * 2.0),
+                    color: Color::WHITE,
                     },
                 )
                 .with_alignment(TextAlignment::Center),
@@ -187,8 +185,8 @@ fn button_handle_system(
             Interaction::Pressed => {
                 text.sections[0].style.color = Color::hex("c6505a").unwrap();
                 match button {
-                    ButtonComponent::Levels => state.set(AppState::LevelSelect),
-                    ButtonComponent::Settings => state.set(AppState::Options),
+                    ButtonComponent::Levels => state.set(AppState::Designer),
+                    ButtonComponent::Settings => state.set(AppState::Designer),
                     ButtonComponent::Quit => exit.send(AppExit),
                 }
             }

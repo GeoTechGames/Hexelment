@@ -3,19 +3,23 @@ use bevy_asset_loader::asset_collection::AssetCollection;
 
 #[derive(AssetCollection, Resource)]
 pub struct ImageAssets {
+    // Designer background
+    #[asset(path = "designer/background.png")]
+    pub background: Handle<Image>,
+
     // Tile highlighted
     #[asset(path = "designer/empty_tile.png")]
     pub highlighted: Handle<Image>,
 
     // Plot tiles
     #[asset(path = "designer/crops.png")]
-    pub crops: Handle<Image>,
+    pub crops: Handle<TextureAtlas>,
     #[asset(path = "designer/round_house.png")]
-    pub round_house: Handle<Image>,
+    pub round_house: Handle<TextureAtlas>,
     #[asset(path = "designer/rectangular_house.png")]
-    pub rectangular_house: Handle<Image>,
+    pub rectangular_house: Handle<TextureAtlas>,
     #[asset(path = "designer/villa.png")]
-    pub villa: Handle<Image>,
+    pub villa: Handle<TextureAtlas>,
 
     // Terrain tiles
     #[asset(path = "designer/grassland.png")]

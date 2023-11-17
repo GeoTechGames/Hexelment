@@ -7,9 +7,11 @@ pub struct ImageAssets {
     #[asset(path = "designer/background.png")]
     pub background: Handle<Image>,
 
-    // Tile highlighted
-    #[asset(path = "designer/empty_tile.png")]
-    pub highlighted: Handle<Image>,
+    // Tile highlights
+    #[asset(path = "designer/hovered_tile.png")]
+    pub hovered: Handle<Image>,
+    #[asset(path = "designer/selected_tile.png")]
+    pub selected: Handle<Image>,
 
     // Plot tiles
     #[asset(path = "designer/crops.png")]

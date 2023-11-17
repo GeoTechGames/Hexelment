@@ -18,13 +18,18 @@ pub struct DesignerEntity {
 #[derive(Component)]
 pub struct TileButton;
 
+#[derive(Component)]
+pub struct SelectedTile;
+
+#[derive(Component)]
+pub struct HoveredTile;
 
 impl Plugin for DesignerPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(AppState::Designer), start_designer_music);
         app.add_systems(OnEnter(AppState::Designer), init::init_designer);
         app.add_systems(OnExit(AppState::Designer), cleanup);
-        app.add_systems(Update, interact::tile_button_handle_system.run_if(in_state(AppState::Designer)));
+        app.add_systems(Update, interact::tile_button_handle_system.run_if(in_state(AppState::Designer)).after(init::init_designer));
     }
 }
 

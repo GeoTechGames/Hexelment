@@ -1,35 +1,33 @@
 use bevy::prelude::*;
 
-use crate::plugins::designer::TileButton;
-use crate::resources::designer::ImageAssets;
+use crate::plugins::designer::{HoveredTile, SelectedTile, TileButton};
+
 
 pub fn tile_button_handle_system(
-    mut commands: Commands,
     mut button_query: Query<
         (&Interaction, &TileButton, &Style),
         (Changed<Interaction>, With<Button>),
     >,
-    designer_assets: Res<ImageAssets>,
+    mut hovered_tile_query: Query<&mut Style, (With<HoveredTile>, Without<Button>, Without<SelectedTile>)>,
+    mut selected_tile_query: Query<&mut Style, (With<SelectedTile>, Without<Button>, Without<HoveredTile>)>
 ) {
-    for (interaction, tile, btn) in button_query.iter_mut() {
+    for (interaction, _tile, btn) in button_query.iter_mut() {
         match *interaction {
-            Interaction::None => (),
-            Interaction::Hovered => {
-                commands.spawn(ImageBundle {
-                    style: Style {
-                        position_type: PositionType::Absolute,
-                        width: btn.width,
-                        height: btn.height,
-                        left: btn.left,
-                        top: btn.top,
-                        ..Default::default()
-                    },
-                    image: UiImage::new(designer_assets.highlighted.clone()),
-                    z_index: ZIndex::Local(10),
-                    ..Default::default()
-                });
+            Interaction::None => {
+                let mut selected_tile = hovered_tile_query.get_single_mut().unwrap();
+                selected_tile.left = Val::Percent(-100.0);
+                selected_tile.top = Val::Percent(-100.0);
             },
-            Interaction::Pressed => (),
+            Interaction::Hovered => {
+                let mut selected_tile = hovered_tile_query.get_single_mut().unwrap();
+                selected_tile.left = btn.left;
+                selected_tile.top = btn.top;
+            },
+            Interaction::Pressed => {
+                let mut selected_tile = selected_tile_query.get_single_mut().unwrap();
+                selected_tile.left = btn.left;
+                selected_tile.top = btn.top;
+            },
         }
     }
 }
